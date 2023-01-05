@@ -1,1 +1,1 @@
-# emulating-sending-email-from-a-form
+# adding javascript interactivity to emulate sending email from a basic HTML and CSS form
