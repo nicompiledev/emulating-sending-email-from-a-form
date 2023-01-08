@@ -13,11 +13,18 @@ document.addEventListener('DOMContentLoaded', function() {
     inputMensaje.addEventListener('blur', validar);
 
     function validar(e) {
-        if(e.target.value.trim === ''){
-            console.log('El campo esta vacio');    
+        if(e.target.value.trim() === ''){
+            mostrarAlerta();    
         }else{
             console.log('El campo esta lleno');
         };
+    }
+
+    function mostrarAlerta() {
+        //Generar alerta en HTML
+        const alerta = document.createElement('p');
+        alerta.textContent = 'Todos los campos son obligatorios';
+        console.log(alerta);
     }
 
 });
