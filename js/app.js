@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', function() {
     inputMensaje.addEventListener('blur', validar);
 
     function validar(e) {
-        console.log(e.target.id)
+        console.log(e.target.parentElement);
         if(e.target.value.trim() === ''){
-            mostrarAlerta(`El campo ${e.target.id} es obligatorio`);    
+            mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);    
         }else{
             console.log('El campo esta lleno');
         };
     }
 
-    function mostrarAlerta(mensaje) {
+    function mostrarAlerta(mensaje, referencia) {
         //Generar alerta en HTML
         const alerta = document.createElement('p');
         alerta.textContent = mensaje;
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         
         //Insertar en el HTML
-        formulario.appendChild(alerta);
+        referencia.appendChild(alerta);
     }
 
 });
