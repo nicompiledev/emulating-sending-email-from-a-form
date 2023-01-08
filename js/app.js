@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
     inputMensaje.addEventListener('blur', validar);
 
     function validar(e) {
-        console.log(e.target.parentElement);
+        //Validar que el campo no este vacio
         if(e.target.value.trim() === ''){
             mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);    
         }else{
@@ -23,14 +23,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function mostrarAlerta(mensaje, referencia) {
+        //Comprobar si ya existe una alerta
+        const alerta = referencia.querySelector('.bg-red-600');
+        console.log(alerta);
+        if(alerta){
+            alerta.remove();
+        }
+
         //Generar alerta en HTML
-        const alerta = document.createElement('p');
-        alerta.textContent = mensaje;
-        alerta.classList.add('bg-red-600', 'text-white',  'p-3','rounded', 'text-xs', 'font-bold', 'text-center', 'mt-3');
+        const error = document.createElement('p');
+        error.textContent = mensaje;
+        error.classList.add('bg-red-600', 'text-white',  'p-3','rounded', 'text-xs', 'font-bold', 'text-center', 'mt-3');
 
         
         //Insertar en el HTML
-        referencia.appendChild(alerta);
+        referencia.appendChild(error);
     }
 
 });
