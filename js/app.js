@@ -1,25 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const email = {
-        email: '',
-        asunto: '',
-        mensaje: ''
-    }
+  const email = {
+    email: "",
+    asunto: "",
+    mensaje: "",
+  };
 
-    console.log(email)
-
+  console.log(email);
 
   //Seleccionar los elementos de la interfaz
   const inputEmail = document.querySelector("#email");
   const inputAsunto = document.querySelector("#asunto");
   const inputMensaje = document.querySelector("#mensaje");
   const formulario = document.querySelector("#formulario");
+  const btnSubmit = document.querySelector("#formulario button[type='submit']");
 
   //Asignar un evento a cada input
-  inputEmail.addEventListener("blur", validar);
+  inputEmail.addEventListener("input", validar);
 
-  inputAsunto.addEventListener("blur", validar);
+  inputAsunto.addEventListener("input", validar);
 
-  inputMensaje.addEventListener("blur", validar);
+  inputMensaje.addEventListener("input", validar);
 
   function validar(e) {
     //Validar que el campo no este vacio
@@ -28,18 +28,22 @@ document.addEventListener("DOMContentLoaded", function () {
         `El campo ${e.target.id} es obligatorio`,
         e.target.parentElement
       );
+      email[e.target.name] = "";
+      comprobarEmail();
       return;
     }
 
-    if (e.target.id === 'email' && !validarEmail(e.target.value)) {
-      mostrarAlerta("Email no valido", e.target.parentElement); 
-      return;     
+    if (e.target.id === "email" && !validarEmail(e.target.value)) {
+      mostrarAlerta("Email no valido", e.target.parentElement);
+      email[e.target.name] = "";
+      comprobarEmail();
+      return;
     }
     limpiarAlerta(e.target.parentElement);
 
     //asignar el valor al objeto
     email[e.target.name] = e.target.value.trim().toLowerCase();
-    
+
     //comprobar que el objeto tenga los 3 campos
     comprobarEmail();
   }
@@ -78,12 +82,17 @@ document.addEventListener("DOMContentLoaded", function () {
       /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
     const resultado = expReg.test(email);
-    console.log(resultado)  
+    console.log(resultado);
     return expReg.test(email);
   }
 
-    function comprobarEmail() {
-        console.log(Object.values(email).includes(''));
+  function comprobarEmail() {
+    if (Object.values(email).includes("")) {
+      btnSubmit.disabled = true;
+      btnSubmit.classList.add("opacity-50");
+    } else {
+      btnSubmit.disabled = false;
+      btnSubmit.classList.remove("opacity-50");
     }
-
+  }
 });
