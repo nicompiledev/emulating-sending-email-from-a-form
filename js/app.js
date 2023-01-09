@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const email = {
+        email: '',
+        asunto: '',
+        mensaje: ''
+    }
+
+    console.log(email)
+
+
   //Seleccionar los elementos de la interfaz
   const inputEmail = document.querySelector("#email");
   const inputAsunto = document.querySelector("#asunto");
@@ -27,6 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
       return;     
     }
     limpiarAlerta(e.target.parentElement);
+
+    //asignar el valor al objeto
+    email[e.target.name] = e.target.value.trim().toLowerCase();
+    
+    //comprobar que el objeto tenga los 3 campos
+    comprobarEmail();
   }
 
   function mostrarAlerta(mensaje, referencia) {
@@ -66,4 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(resultado)  
     return expReg.test(email);
   }
+
+    function comprobarEmail() {
+        console.log(Object.values(email).includes(''));
+    }
+
 });
