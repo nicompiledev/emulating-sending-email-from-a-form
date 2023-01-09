@@ -16,10 +16,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function validar(e) {
         //Validar que el campo no este vacio
         if(e.target.value.trim() === ''){
-            mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);    
-        }else{
-            console.log('El campo esta lleno');
-        };
+            mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
+            return;    
+        }
+        limpiarAlerta(e.target.parentElement);
+        console.log('despues del if');
     }
 
     function mostrarAlerta(mensaje, referencia) {
@@ -38,6 +39,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         //Insertar en el HTML
         referencia.appendChild(error);
+    }
+
+    function limpiarAlerta(referencia) {
+        const alerta = referencia.querySelector('.bg-red-600');
+        if(alerta){
+            alerta.remove();
+        }
     }
 
 });
