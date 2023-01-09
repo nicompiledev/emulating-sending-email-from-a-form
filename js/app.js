@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const inputMensaje = document.querySelector("#mensaje");
   const formulario = document.querySelector("#formulario");
   const btnSubmit = document.querySelector("#formulario button[type='submit']");
+  const btnReset = document.querySelector("#formulario button[type='reset']");
 
   //Asignar un evento a cada input
   inputEmail.addEventListener("input", validar);
@@ -20,6 +21,18 @@ document.addEventListener("DOMContentLoaded", function () {
   inputAsunto.addEventListener("input", validar);
 
   inputMensaje.addEventListener("input", validar);
+
+  btnReset.addEventListener("click", function (e) {
+    e.preventDefault();
+
+    //Limpiar el objeto
+    email.email = "";
+    email.asunto = "";
+    email.mensaje = "";
+
+    formulario.reset();
+    comprobarEmail();
+  });
 
   function validar(e) {
     //Validar que el campo no este vacio
