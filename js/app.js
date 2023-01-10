@@ -1,14 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
   const email = {
     email: "",
+    cc: "opcional",
     asunto: "",
     mensaje: "",
   };
 
-  console.log(email);
+  //console.log(email);
 
   //Seleccionar los elementos de la interfaz
   const inputEmail = document.querySelector("#email");
+  const inputCC = document.querySelector("#cc");
   const inputAsunto = document.querySelector("#asunto");
   const inputMensaje = document.querySelector("#mensaje");
   const formulario = document.querySelector("#formulario");
@@ -18,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Asignar un evento a cada input
   inputEmail.addEventListener("input", validar);
+
+  inputCC.addEventListener("input", validar);
 
   inputAsunto.addEventListener("input", validar);
 
@@ -48,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
       alertaExito.textContent = "El mensaje se envio correctamente";
       formulario.appendChild(alertaExito);
       console.log(alertaExito);
+      console.log(email);
       
       setTimeout(() => {
         alertaExito.remove();
@@ -68,6 +73,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (e.target.id === "email" && !validarEmail(e.target.value)) {
+      mostrarAlerta("Email no valido", e.target.parentElement);
+      email[e.target.name] = "";
+      comprobarEmail();
+      return;
+    }
+
+    if (e.target.id === "cc" && !validarEmail(e.target.value)) {
       mostrarAlerta("Email no valido", e.target.parentElement);
       email[e.target.name] = "";
       comprobarEmail();
@@ -111,13 +123,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function validarEmail(email) {
+  function validarEmail(email, cc) {
     const expReg =
       /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-    const resultado = expReg.test(email);
+    const resultado = expReg.test(email, cc);
     console.log(resultado);
-    return expReg.test(email);
+    return expReg.test(email, cc);
   }
 
   function comprobarEmail() {
