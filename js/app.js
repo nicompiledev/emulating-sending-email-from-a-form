@@ -41,6 +41,17 @@ document.addEventListener("DOMContentLoaded", function () {
       spinner.classList.remove("flex");
 
       resetFormulario();
+
+      //Mostrar mensaje de enviado
+      const alertaExito = document.createElement("p");
+      alertaExito.classList.add('bg-green-500', 'text-white', 'p-2', 'rounded-lg', 'font-bold', 'text-center', 'mt-10', 'uppercase', 'text-sm');
+      alertaExito.textContent = "El mensaje se envio correctamente";
+      formulario.appendChild(alertaExito);
+      console.log(alertaExito);
+      
+      setTimeout(() => {
+        alertaExito.remove();
+      }, 3000);
     }, 3000);
   }
 
